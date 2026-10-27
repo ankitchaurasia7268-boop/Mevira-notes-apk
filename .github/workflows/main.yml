@@ -23,9 +23,10 @@ jobs:
           python3 -m pip install --user --upgrade pip
           python3 -m pip install --user buildozer cython==0.29.36
 
-      - name: Accept Android SDK licenses
+            - name: Accept Android SDK licenses
         run: |
           mkdir -p "$HOME/.buildozer"
+          export PATH="$HOME/.local/bin:$PATH"
           yes | buildozer android update || true
 
       - name: Create Buildozer configuration
@@ -47,7 +48,7 @@ jobs:
           warn_on_root = 1
           EOF
 
-      - name: Build Android APK
+            - name: Build Android APK
         run: |
           export PATH="$HOME/.local/bin:$PATH"
           yes | buildozer -v android debug
